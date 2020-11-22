@@ -1158,16 +1158,8 @@ class sAdmin implements \Enlight_Hook
             'sConfig' => $this->config,
         ];
 
-        $namespace = $this->snippetManager->getNamespace('frontend/salutation');
         $register = $this->session->offsetGet('sRegister');
-
-        foreach ($register['billing'] as $key => $value) {
-            if ($key === 'salutation') {
-                $value = $namespace->get($value);
-            }
-
-            $context[$key] = $value;
-        }
+        $context = array_merge($context, $register['billing']);
 
         if (array_key_exists('password', $context)) {
             unset($context['password']);
